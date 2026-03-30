@@ -3,7 +3,7 @@
 
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>Brasil Premium - O Manto Sagrado</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
@@ -11,140 +11,106 @@
     <style>
         h1, h2, .font-oswald { font-family: 'Oswald', sans-serif; }
         body { font-family: 'Poppins', sans-serif; scroll-behavior: smooth; overflow-x: hidden; }
-        
         .text-gold { color: #bf9b30; }
         .bg-gold { background-color: #bf9b30; }
-        
         .btn-premium {
             background: linear-gradient(135deg, #bf9b30 0%, #e6c15c 50%, #bf9b30 100%);
             background-size: 200% auto;
             transition: 0.5s;
         }
         .btn-premium:hover { background-position: right center; transform: translateY(-2px); }
-        
         .marquee-wrapper { overflow: hidden; width: 100%; background: #15803d; display: flex; }
         .marquee-track { display: flex; white-space: nowrap; width: max-content; animation: scroll-infinite 30s linear infinite; }
         .marquee-item { display: flex; align-items: center; gap: 2rem; padding-right: 2rem; }
+        @keyframes scroll-infinite { 0% { transform: translateX(0); } 100% { transform: translateX(-50%); } }
         
-        @keyframes scroll-infinite {
-            0% { transform: translateX(0); }
-            100% { transform: translateX(-50%); }
-        }
-
-        /* Animação de entrada suave */
-        .reveal {
-            opacity: 0;
-            transform: translateY(20px);
-            animation: fadeInUp 0.8s ease forwards;
-        }
-        @keyframes fadeInUp {
-            to { opacity: 1; transform: translateY(0); }
-        }
-
-        canvas#confetti-canvas {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            pointer-events: none;
-            z-index: 999;
-        }
+        /* Animação de entrada */
+        .reveal { opacity: 0; transform: translateY(15px); animation: fadeInUp 0.6s ease forwards; }
+        @keyframes fadeInUp { to { opacity: 1; transform: translateY(0); } }
+        
+        canvas#confetti-canvas { position: fixed; top: 0; left: 0; width: 100%; height: 100%; pointer-events: none; z-index: 999; }
     </style>
 </head>
 
-<body class="bg-zinc-50 text-zinc-900 pb-20 md:pb-10">
+<body class="bg-zinc-50 text-zinc-900 pb-10">
     <canvas id="confetti-canvas"></canvas>
 
-    <header class="sticky top-0 z-40 bg-zinc-950 text-white p-4 shadow-lg border-b border-zinc-800">
-        <div class="max-w-7xl mx-auto flex justify-between items-center">
-            <h1 class="font-bold text-xl md:text-2xl uppercase tracking-tighter italic">SELEÇÃO <span class="text-gold">PREMIUM</span></h1>
-            <div class="text-gold font-bold text-[10px] md:text-xs uppercase tracking-widest border border-gold/30 px-2 py-1 rounded">Edição 2026</div>
+    <header class="sticky top-0 z-40 bg-zinc-950 text-white p-4 shadow-md border-b border-zinc-800">
+        <div class="max-w-7xl mx-auto flex justify-between items-center px-2">
+            <h1 class="font-bold text-xl uppercase tracking-tighter italic">SELEÇÃO <span class="text-gold">PREMIUM</span></h1>
+            <div class="text-gold font-bold text-[10px] uppercase tracking-widest border border-gold/30 px-2 py-0.5 rounded">2026</div>
         </div>
     </header>
 
     <div class="bg-green-700 text-white py-2 overflow-hidden border-b border-green-800 shadow-sm relative z-30">
-        <div class="marquee-wrapper py-1.5 uppercase text-[9px] md:text-xs font-bold tracking-widest italic">
+        <div class="marquee-wrapper py-1 uppercase text-[10px] font-bold tracking-widest italic">
             <div class="marquee-track">
                 <div class="marquee-item">
-                    <span>🔥 Maria V. acabou de comprar!</span>
-                    <span>✅ Gonsalvez garantiu o manto!</span>
-                    <span>🚀 Vitor Hugo acabou de comprar!</span>
-                    <span>🔥 Ana Julia acabou de comprar!</span>
-                    <span>✅ Ricardo S. garantiu o manto!</span>
+                    <span>🔥 Maria V. comprou!</span> <span>✅ Gonsalvez garantiu!</span> <span>🚀 Vitor Hugo comprou!</span> <span>🔥 Ana Julia comprou!</span>
                 </div>
                 <div class="marquee-item" aria-hidden="true">
-                    <span>🔥 Maria V. acabou de comprar!</span>
-                    <span>✅ Gonsalvez garantiu o manto!</span>
-                    <span>🚀 Vitor Hugo acabou de comprar!</span>
-                    <span>🔥 Ana Julia acabou de comprar!</span>
-                    <span>✅ Ricardo S. garantiu o manto!</span>
+                    <span>🔥 Maria V. comprou!</span> <span>✅ Gonsalvez garantiu!</span> <span>🚀 Vitor Hugo comprou!</span> <span>🔥 Ana Julia comprou!</span>
                 </div>
             </div>
         </div>
     </div>
 
-    <main class="max-w-7xl mx-auto px-4 md:px-8 mt-6 md:mt-10">
-        <div class="flex flex-col md:grid md:grid-cols-2 gap-8 md:gap-12 items-start">
+    <main class="max-w-7xl mx-auto mt-4">
+        <div class="flex flex-col md:grid md:grid-cols-2 gap-6 md:gap-12 items-start">
 
-            <div class="w-full reveal" style="animation-delay: 0.2s;">
-                <div class="sticky top-28">
-                    <div class="relative group aspect-[4/5] overflow-hidden bg-white rounded-2xl md:rounded-3xl shadow-xl border border-zinc-200">
-                        <img id="main-product-img" src="./colecao_selecaoo/Camisa-copa.webp" alt="Camisa Brasil Premium" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105">
-                        <div class="absolute top-4 right-4 bg-green-600 text-white text-[10px] font-bold px-3 py-1 rounded-full uppercase">Estoque Baixo</div>
-                        <div class="absolute bottom-4 left-4 bg-zinc-950/80 backdrop-blur-md text-gold text-[10px] font-bold px-4 py-2 rounded-lg uppercase tracking-wider">📦 Envio Imediato</div>
+            <div class="w-full reveal px-0 md:px-4" style="animation-delay: 0.1s;">
+                <div class="md:sticky md:top-28">
+                    <div class="relative aspect-[1/1.1] md:aspect-[4/5] overflow-hidden bg-white md:rounded-3xl shadow-lg">
+                        <img id="main-product-img" src="./colecao_selecaoo/Camisa-copa.webp" alt="Camisa Brasil" class="w-full h-full object-cover">
+                        <div class="absolute bottom-4 left-4 bg-zinc-950/80 backdrop-blur-md text-gold text-[10px] font-bold px-3 py-1.5 rounded uppercase">🔥 Edição Limitada</div>
                     </div>
                 </div>
             </div>
 
-            <div class="space-y-6 md:space-y-8 reveal" style="animation-delay: 0.4s;">
-                <div class="text-center md:text-left">
-                    <span class="text-[11px] font-bold text-green-700 uppercase tracking-[0.2em] italic">Tecnologia Vapor Match</span>
-                    <h2 class="text-3xl md:text-5xl lg:text-6xl font-extrabold text-zinc-950 uppercase tracking-tighter italic leading-none mt-2">
-                        Manto Sagrado <br>Brasil 2026</h2>
+            <div class="w-full px-4 md:px-0 space-y-6 reveal" style="animation-delay: 0.3s;">
+                <div class="text-left">
+                    <span class="text-[10px] font-bold text-green-700 uppercase tracking-widest italic">Qualidade Profissional</span>
+                    <h2 class="text-3xl md:text-5xl font-extrabold text-zinc-950 uppercase tracking-tighter italic leading-tight mt-1">
+                        Manto Sagrado Brasil 2026
+                    </h2>
                 </div>
 
-                <div class="bg-zinc-950 p-6 md:p-8 rounded-2xl shadow-2xl border border-zinc-800 relative overflow-hidden">
-                    <div class="absolute top-0 right-0 bg-gold text-zinc-950 text-[10px] font-black px-3 py-1 uppercase italic">75% OFF</div>
-                    <span class="text-zinc-500 line-through text-sm">De R$ 299,99</span>
-                    <div class="flex flex-col mt-1">
-                        <span class="text-gold font-bold text-xs uppercase tracking-wider">Preço exclusivo via PIX</span>
-                        <div class="flex items-baseline gap-1 text-white mt-1">
-                            <span class="text-xl font-light">R$</span>
-                            <span class="text-6xl font-black tracking-tighter">79,<span class="text-3xl">99</span></span>
+                <div class="w-full bg-zinc-950 p-6 rounded-2xl shadow-xl border border-zinc-800 relative overflow-hidden">
+                    <div class="flex justify-between items-start">
+                        <div>
+                            <span class="text-zinc-500 line-through text-xs italic">De R$ 299,99</span>
+                            <div class="flex items-baseline gap-1 text-white mt-1">
+                                <span class="text-lg font-light">R$</span>
+                                <span class="text-6xl font-black tracking-tighter">79,<span class="text-3xl">99</span></span>
+                            </div>
                         </div>
-                        <span class="text-green-400 font-bold text-xs mt-2 flex items-center gap-1">
-                            <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 20 20"><path d="M8 16.5a1.5 1.5 0 11-3 0 1.5 1.5 0 013 0zM15 16.5a1.5 1.5 0 11-3 0 1.5 1.5 0 013 0z"/><path d="M3 4a1 1 0 00-1 1v1h16V5a1 1 0 00-1-1H3zM2 9h16v5a1 1 0 01-1 1H3a1 1 0 01-1-1V9z"/></svg>
-                            FRETE GRÁTIS PARA TODO BRASIL
-                        </span>
+                        <div class="bg-gold text-zinc-950 text-[10px] font-black px-2 py-1 rounded uppercase italic">Oferta Pix</div>
+                    </div>
+                    <div class="mt-4 pt-4 border-t border-zinc-800 flex items-center gap-2 text-green-400 font-bold text-[11px] uppercase tracking-wider">
+                        <span class="flex h-2 w-2 rounded-full bg-green-500 animate-pulse"></span>
+                        Frete Grátis para todo o Brasil
                     </div>
                 </div>
 
-                <div>
-                    <div class="flex justify-between items-center mb-4">
-                        <p class="text-xs font-bold text-zinc-900 uppercase tracking-widest">Tamanho:</p>
-                        <span class="text-[10px] text-zinc-400 underline uppercase">Guia de medidas</span>
-                    </div>
-                    <div class="grid grid-cols-4 gap-2 md:gap-4">
-                        <button onclick="selectSize('P', this)" class="size-btn border-2 border-zinc-200 rounded-xl py-3 md:py-4 font-oswald font-bold text-lg hover:border-gold transition-all text-zinc-600">P</button>
-                        <button onclick="selectSize('M', this)" class="size-btn border-2 border-zinc-200 rounded-xl py-3 md:py-4 font-oswald font-bold text-lg hover:border-gold transition-all text-zinc-600">M</button>
-                        <button onclick="selectSize('G', this)" class="size-btn border-2 border-zinc-200 rounded-xl py-3 md:py-4 font-oswald font-bold text-lg hover:border-gold transition-all text-zinc-600">G</button>
-                        <button onclick="selectSize('GG', this)" class="size-btn border-2 border-zinc-200 rounded-xl py-3 md:py-4 font-oswald font-bold text-lg hover:border-gold transition-all text-zinc-600">GG</button>
+                <div class="w-full">
+                    <p class="text-[11px] font-bold text-zinc-500 uppercase tracking-widest mb-3">Selecione o Tamanho:</p>
+                    <div class="grid grid-cols-4 gap-2 w-full">
+                        <button onclick="selectSize('P', this)" class="size-btn w-full border-2 border-zinc-200 rounded-xl py-4 font-oswald font-bold text-xl transition-all text-zinc-600 bg-white">P</button>
+                        <button onclick="selectSize('M', this)" class="size-btn w-full border-2 border-zinc-200 rounded-xl py-4 font-oswald font-bold text-xl transition-all text-zinc-600 bg-white">M</button>
+                        <button onclick="selectSize('G', this)" class="size-btn w-full border-2 border-zinc-200 rounded-xl py-4 font-oswald font-bold text-xl transition-all text-zinc-600 bg-white">G</button>
+                        <button onclick="selectSize('GG', this)" class="size-btn w-full border-2 border-zinc-200 rounded-xl py-4 font-oswald font-bold text-xl transition-all text-zinc-600 bg-white">GG</button>
                     </div>
                 </div>
 
-                <div class="space-y-4">
+                <div class="space-y-4 pt-2">
                     <a href="https://pay.sunize.com.br/LPQqmWeh" id="btn-compra-final" target="_blank"
-                        class="flex w-full btn-premium text-zinc-950 py-5 rounded-xl font-oswald font-bold text-xl justify-center items-center shadow-[0_10px_20px_rgba(191,155,48,0.3)] uppercase tracking-wider">
-                        QUERO MEU MANTO AGORA
+                        class="flex w-full btn-premium text-zinc-950 py-5 rounded-xl font-oswald font-bold text-xl justify-center items-center shadow-lg uppercase tracking-wider">
+                        COMPRAR AGORA NO PIX
                     </a>
                     
-                    <div class="flex flex-col items-center gap-3">
-                        <div class="flex items-center gap-4 opacity-60 grayscale hover:grayscale-0 transition-all">
-                            <img src="https://logospng.org/download/pix/logo-pix-1024.png" class="h-10 md:h-12" alt="Pix">
-                            <div class="h-8 w-[1px] bg-zinc-300"></div>
-                            <span class="text-[9px] font-bold uppercase tracking-[0.2em] leading-tight">Pagamento Seguro<br>via Sunize</span>
-                        </div>
+                    <div class="flex justify-center items-center gap-6 opacity-40 grayscale py-2">
+                        <img src="https://logospng.org/download/pix/logo-pix-1024.png" class="h-8" alt="Pix">
+                        <span class="text-[9px] font-bold uppercase tracking-[0.2em] text-center">Checkout Seguro<br>Sunize Pay</span>
                     </div>
                 </div>
             </div>
@@ -152,40 +118,24 @@
     </main>
 
     <script>
-        // Efeito de Confetes na entrada
+        // Confetes na entrada (3 segundos)
         window.addEventListener('DOMContentLoaded', () => {
             const end = Date.now() + 3000;
             const colors = ['#bf9b30', '#ffffff', '#15803d'];
-
             (function frame() {
-                confetti({
-                    particleCount: 3,
-                    angle: 60,
-                    spread: 55,
-                    origin: { x: 0 },
-                    colors: colors
-                });
-                confetti({
-                    particleCount: 3,
-                    angle: 120,
-                    spread: 55,
-                    origin: { x: 1 },
-                    colors: colors
-                });
-
-                if (Date.now() < end) {
-                    requestAnimationFrame(frame);
-                }
+                confetti({ particleCount: 3, angle: 60, spread: 55, origin: { x: 0 }, colors: colors });
+                confetti({ particleCount: 3, angle: 120, spread: 55, origin: { x: 1 }, colors: colors });
+                if (Date.now() < end) requestAnimationFrame(frame);
             }());
         });
 
         function selectSize(size, element) {
             document.querySelectorAll('.size-btn').forEach(btn => {
-                btn.classList.remove('border-gold', 'text-gold', 'bg-zinc-100', 'shadow-inner');
+                btn.classList.remove('border-gold', 'text-gold', 'bg-zinc-50', 'ring-2', 'ring-gold/20');
                 btn.classList.add('text-zinc-600', 'border-zinc-200');
             });
             element.classList.remove('text-zinc-600', 'border-zinc-200');
-            element.classList.add('border-gold', 'text-gold', 'bg-zinc-100', 'shadow-inner');
+            element.classList.add('border-gold', 'text-gold', 'bg-zinc-50', 'ring-2', 'ring-gold/20');
 
             const links = {
                 'P': 'https://pay.sunize.com.br/kfeblPAQ',
@@ -193,14 +143,7 @@
                 'G': 'https://pay.sunize.com.br/LPQqmWeh',
                 'GG': 'https://pay.sunize.com.br/SjXnfjRG'
             };
-
-            const btnCompra = document.getElementById('btn-compra-final');
-            if (btnCompra) {
-                btnCompra.href = links[size];
-                // Pequeno efeito de pulsar ao trocar o link
-                btnCompra.style.transform = 'scale(1.02)';
-                setTimeout(() => btnCompra.style.transform = 'scale(1)', 200);
-            }
+            document.getElementById('btn-compra-final').href = links[size];
         }
     </script>
 </body>
