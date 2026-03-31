@@ -82,11 +82,16 @@
 
             <div class="w-full px-4 md:px-0 space-y-6 reveal" style="animation-delay: 0.3s;">
                 <div class="text-left">
-                    <span class="text-[10px] font-bold text-green-700 uppercase tracking-widest italic">Qualidade Profissional</span>
+                    <span class="text-[10px] font-bold text-green-700 uppercase tracking-widest italic">Qualidade Profissional Unissex</span>
                     <h2 class="text-3xl md:text-5xl font-extrabold text-zinc-950 uppercase tracking-tighter italic leading-tight mt-1">
                         Manto Sagrado Brasil 2026
                     </h2>
                 </div>
+                <h4
+                        class="text-2xl md:text-4xl lg:text-5xl font-black text-zinc-950 uppercase tracking-tighter italic leading-none mt-4">
+                        <span class="bg-zinc-950 text-white px-2 py-1">1 UNID. R$54,99</span>
+                        <span class="text-gold ml-1">OU 2 POR R$79,99</span>
+                </h4>
 
                 <div class="w-full bg-zinc-950 p-6 rounded-2xl shadow-xl border border-zinc-800 relative overflow-hidden">
                     <div class="flex justify-between items-start">
@@ -142,21 +147,78 @@
             }());
         });
 
-        function selectSize(size, element) {
-            document.querySelectorAll('.size-btn').forEach(btn => {
-                btn.classList.remove('border-gold', 'text-gold', 'bg-zinc-50', 'ring-2', 'ring-gold/20');
-                btn.classList.add('text-zinc-600', 'border-zinc-200');
-            });
-            element.classList.remove('text-zinc-600', 'border-zinc-200');
-            element.classList.add('border-gold', 'text-gold', 'bg-zinc-50', 'ring-2', 'ring-gold/20');
+               // 1. LINKS PARA 1 UNIDADE (Simples)
+        const linksUnitarios = {
+            'P': 'https://pay.sunize.com.br/LINK_P_54',
+            'M': 'https://pay.sunize.com.br/LINK_M_54',
+            'G': 'https://pay.sunize.com.br/LINK_G_54',
+            'GG': 'https://pay.sunize.com.br/LINK_GG_54'
+        };
 
-            const links = {
-                'P': 'https://pay.sunize.com.br/kfeblPAQ',
-                'M': 'https://pay.sunize.com.br/sSZOroBb',
-                'G': 'https://pay.sunize.com.br/LPQqmWeh',
-                'GG': 'https://pay.sunize.com.br/SjXnfjRG'
-            };
-            document.getElementById('btn-compra-final').href = links[size];
+        // 2. LINKS PARA 2 UNIDADES (Combinações)
+        // Dica: A lógica sempre coloca em ordem: G, GG, M, P (Alfabética)
+        // Assim você só precisa criar 10 links para as combinações de 2 peças.
+        const linksCombos = {
+            'P,P': 'https://pay.sunize.com.br/COMBO_PP',
+            'M,P': 'https://pay.sunize.com.br/COMBO_MP',
+            'G,P': 'https://pay.sunize.com.br/COMBO_GP',
+            'GG,P': 'https://pay.sunize.com.br/COMBO_GGP',
+            'M,M': 'https://pay.sunize.com.br/COMBO_MM',
+            'G,M': 'https://pay.sunize.com.br/COMBO_GM',
+            'GG,M': 'https://pay.sunize.com.br/COMBO_GGM',
+            'G,G': 'https://pay.sunize.com.br/COMBO_GG',
+            'G,GG': 'https://pay.sunize.com.br/COMBO_GGG',
+            'GG,GG': 'https://pay.sunize.com.br/COMBO_GGGG'
+        };
+
+        let selectedSizes = [];
+
+        function selectSize(size, element) {
+            const index = selectedSizes.indexOf(size);
+
+            if (index > -1) {
+                // Desmarcar
+                selectedSizes.splice(index, 1);
+                element.classList.remove('border-gold', 'text-gold', 'bg-zinc-50', 'ring-2', 'ring-gold/20');
+            } else {
+                // Se já tem 2, não deixa marcar o 3º
+                if (selectedSizes.length >= 2) {
+                    alert("Selecione no máximo 2 tamanhos.");
+                    return;
+                }
+                // Marcar
+                selectedSizes.push(size);
+                element.classList.add('border-gold', 'text-gold', 'bg-zinc-50', 'ring-2', 'ring-gold/20');
+            }
+
+            atualizarBotao();
+        }
+
+        function atualizarBotao() {
+            const btn = document.getElementById('btn-compra-final');
+            const precoDisplay = document.getElementById('display-preco');
+
+            // Ordenamos o array para bater com as chaves do dicionário linksCombos
+            const selecaoOrdenada = [...selectedSizes].sort();
+            const chave = selecaoOrdenada.join(',');
+
+            if (selectedSizes.length === 1) {
+                // Lógica 54,99
+                precoDisplay.innerHTML = '54,<span class="text-3xl">99</span>';
+                btn.href = linksUnitarios[chave] || "#";
+                btn.innerText = `COMPRAR 1 CAMISA (${selectedSizes[0]})`;
+            }
+            else if (selectedSizes.length === 2) {
+                // Lógica 79,99
+                precoDisplay.innerHTML = '79,<span class="text-3xl">99</span>';
+                btn.href = linksCombos[chave] || "#";
+                btn.innerText = `LEVAR 2: ${selectedSizes[0]} + ${selectedSizes[1]}`;
+            }
+            else {
+                // Nada selecionado
+                btn.href = "javascript:void(0)";
+                btn.innerText = "SELECIONE O TAMANHO";
+            }
         }
     </script>
 </body>
