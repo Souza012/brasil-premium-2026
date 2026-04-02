@@ -11,6 +11,58 @@
     <style>
         h1, h2, .font-oswald { font-family: 'Oswald', sans-serif; }
         body { font-family: 'Poppins', sans-serif; scroll-behavior: smooth; overflow-x: hidden; }
+
+
+                .header-premium {
+            min-height: 80px;
+        }
+
+        .titulo-jogador {
+            font-size: 1.25rem;
+        }
+
+        .txt-parceria {
+            font-size: 10px;
+        }
+        .logo-tiktok-shop {
+            display: block;
+            height: 80px;
+            width: auto;
+            filter: brightness(0) invert(1);
+            object-fit: contain;
+        }
+
+        .badge-ano {
+            position: absolute;
+            top: 8px;
+            right: 12px;
+            color: #D4AF37;
+            font-weight: bold;
+            font-size: 10px;
+            letter-spacing: 0.2em;
+            border: 1px solid rgba(212, 175, 55, 0.3);
+            padding: 2px 8px;
+            border-radius: 4px;
+            opacity: 0.8;
+        }
+        @media (min-width: 768px) {
+            .header-premium {
+                min-height: 100px;
+            }
+
+            .titulo-jogador {
+                font-size: 1.75rem;
+            }
+
+            .logo-tiktok-shop {
+                height: 68px;
+            }
+
+            .txt-parceria {
+                font-size: 12px;
+            }
+        }
+
         .text-gold { color: #bf9b30; }
         .bg-gold { background-color: #bf9b30; }
         .btn-premium {
@@ -35,10 +87,30 @@
 <body class="bg-zinc-50 text-zinc-900 pb-10">
     <canvas id="confetti-canvas"></canvas>
 
-    <header class="sticky top-0 z-40 bg-zinc-950 text-white p-4 shadow-md border-b border-zinc-800">
-        <div class="max-w-7xl mx-auto flex justify-between items-center px-2">
-            <h1 class="font-bold text-xl uppercase tracking-tighter italic">SELEÇÃO <span class="text-gold">PREMIUM</span></h1>
-            <div class="text-gold font-bold text-[10px] uppercase tracking-widest border border-gold/30 px-2 py-0.5 rounded">2026</div>
+    <header class="header-premium sticky top-0 z-40 bg-zinc-950 text-white shadow-md border-b border-zinc-800">
+        <div
+            class="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-start md:items-center px-4 py-3 md:py-5 gap-y-3 relative">
+
+            <div class="flex flex-col md:flex-row items-start md:items-center gap-2 md:gap-6">
+
+                <h1 class="titulo-jogador font-bold uppercase italic leading-none">
+                    VERSÃO <span class="text-gold">JOGADOR</span>
+                </h1>
+
+                <div class="hidden md:block h-8 w-[1px] bg-zinc-700"></div>
+
+                <div class="flex items-center gap-3">
+                    <span class="txt-parceria text-zinc-400 uppercase tracking-widest font-medium">
+                        Parceria com
+                    </span>
+                    <img src="imgs/Logo do TikTok Shop.png" alt="TikTok Shop" class="logo-tiktok-shop" />
+                </div>
+            </div>
+
+            <div class="badge-ano">
+                2026
+            </div>
+
         </div>
     </header>
 
